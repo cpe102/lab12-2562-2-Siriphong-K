@@ -1,20 +1,21 @@
 #include <iostream>
 #include <cmath>
+#include <math.h>
 using namespace std;
 
 const int N = 30;
 const int M = 70;
 
-void updateImage(bool [][M],int,int,int);
-
-void showImage(const bool [][M]);
+void updateImage(bool [][M],int s,int x,int y);
+void showImage(const bool [][M],int s,int x,int y);
 
 int main()
 {
     bool image[N][M] = {};
     int s,x,y;
+	
     do{
-        showImage(image);
+		showImage(image,s,x,y);
         cout << "Input your brush size and location:";
         cin >> s >> x >> y;
         updateImage(image,s,x,y);
@@ -23,3 +24,46 @@ int main()
 }
 
 // Write definition of updateImage() and showImage() here
+void updateImage(bool image[][M],int s,int x,int y){
+	for(int i=0;i<N;i++){
+		for(int j=0;j<M;j++){
+			if(sqrt(pow(i-x,2)+pow(j-y,2))<=s-1){
+				image[i][j]=1;
+			}
+		}
+	}
+}
+void showImage(const bool image[][M],int s,int x,int y){
+	
+ for(int p=0;p<M;p++){
+ 	cout<<"-";
+ }
+ cout<<"-";
+ cout<<"-";
+ cout<<"\n";
+
+	for(int i=0;i<N;i++){
+		cout<<"|";
+		for(int j=0;j<M;j++){
+			if(image[i][j]==1){
+				cout<<"*";
+			}else {
+				cout<<" ";
+			}
+		}
+		cout<<"|";
+		cout<<"\n";
+		
+	} 
+	for(int p=0;p<M;p++){
+ 		cout<<"-";
+ 		}
+ 		cout<<"-";
+ 		cout<<"-";
+ 		cout<<"\n";		
+}
+	
+
+
+	
+
